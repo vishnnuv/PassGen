@@ -1,2 +1,4 @@
 # PassGen
-A customisable password generator for web page with python flask
+A customisable password generator for web page
+## Technolgy used
+-Flask
