@@ -4,6 +4,6 @@ A customisable password generator for web page
 - Backend: **Flask**
 - Frontend: **HTML, CSS**
 ## Demo
-![screenshot1](https://github.com/vishnnuv/PassGen/blob/main/ReadmeAssests/Screenshot%202024-06-06%20101010.png)
+![screenshot1]()
 ![screenshot2]()
 ![screenshot3]()
