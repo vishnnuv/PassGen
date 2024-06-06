@@ -1,4 +1,5 @@
 # PassGen
 A customisable password generator for web page
 ## Technolgy used
-- Flask
+- Backend: **Flask**
+- Frontend: **HTML, CSS**
