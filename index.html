@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Login</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <div class="password-input">
+                    <input type="password" id="password" name="password" required>
+                    <button type="button" class="password-toggle" onclick="togglePasswordVisibility()">Show</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Password Length:</label>
+                <input type="number" id="length" name="length" value="12" min="1">
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="include-uppercase" checked>
+                <label for="include-uppercase">Include Uppercase</label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="include-lowercase" checked>
+                <label for="include-lowercase">Include Lowercase</label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="include-digits" checked>
+                <label for="include-digits">Include Digits</label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="include-special" checked>
+                <label for="include-special">Include Special Characters</label>
+            </div>
+            <button type="button" onclick="generatePassword()">Generate Password</button>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        async function generatePassword() {
+            const length = parseInt(document.getElementById("length").value);
+            const includeUppercase = document.getElementById("include-uppercase").checked;
+            const includeLowercase = document.getElementById("include-lowercase").checked;
+            const includeDigits = document.getElementById("include-digits").checked;
+            const includeSpecial = document.getElementById("include-special").checked;
+
+            const response = await fetch('/generate_password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    length: length,
+                    include_uppercase: includeUppercase,
+                    include_lowercase: includeLowercase,
+                    include_digits: includeDigits,
+                    include_special: includeSpecial,
+                    special_characters: "!@#$%^&*()_+~`|}{[]:;?><,./-=",
+                    exclude_ambiguous: true,
+                    min_uppercase: 1,
+                    min_lowercase: 1,
+                    min_digits: 1,
+                    min_special: 1
+                })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                document.getElementById("password").value = data.password;
+            } else {
+                alert('Error generating password');
+            }
+        }
+
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById("password");
+            const passwordToggle = document.querySelector(".password-toggle");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                passwordToggle.textContent = "Hide";
+            } else {
+                passwordInput.type = "password";
+                passwordToggle.textContent = "Show";
+            }
+        }
+    </script>
+</body>
+</html>
