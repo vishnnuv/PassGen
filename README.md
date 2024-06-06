@@ -4,3 +4,6 @@ A customisable password generator for web page
 - Backend: **Flask**
 - Frontend: **HTML, CSS**
 ## Demo
+![screenshot1]()
+![screenshot2]()
+![screenshot3]()
