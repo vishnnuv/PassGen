@@ -22,9 +22,13 @@ A customisable password generator for web page
 - Flask
 ## How to run
 install Flask in terminal 
+
 `pip install Flask`
+
 Change directory to folder with app.py
+
 Run following script in terminal
+
 `python app.py`
 And navigate to http://127.0.0.1:5000/
 Feel free to customize and use the code.
